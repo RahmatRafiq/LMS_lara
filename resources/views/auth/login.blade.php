@@ -6,14 +6,15 @@
                     <div class="card-header">
                         <h4>Silahkan Login</h4>
                     </div>
+                        <img src="{{ asset('assets/login.jpg') }}" alt="Logo" class="img-fluid mx-auto d-block mt-2">
                     <div class="card-body">
                         <x-alert />
                         <form method="POST" action="{{ route('login') }}" class="needs-validation mt-2" novalidate="">
                             @csrf
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input id="email" type="email" class="form-control" name="email" tabindex="1" required
-                                    value="{{ old('email') }}" autofocus>
+                                <input id="email" type="email" class="form-control" name="email" tabindex="1"
+                                    required value="{{ old('email') }}" autofocus>
                                 <div class="invalid-feedback">
                                     Email tidak boleh kosong.
                                 </div>
@@ -27,8 +28,8 @@
                                         </a>
                                     </div>
                                 </div>
-                                <input id="password" type="password" class="form-control" name="password" tabindex="2"
-                                    required>
+                                <input id="password" type="password" class="form-control" name="password"
+                                    tabindex="2" required>
                                 <div class="invalid-feedback">
                                     Password tidak boleh kosong.
                                 </div>
