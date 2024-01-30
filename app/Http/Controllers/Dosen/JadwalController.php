@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\Dosen;
 
-use App\Models\{Dosen, Jadwal};
 use App\Http\Controllers\Controller;
+use App\Models\Dosen;
+
+use App\Models\Jadwal;
 use Illuminate\Support\Facades\Auth;
 
 class JadwalController extends Controller
 {
     public function jadwalMengajar()
     {
-        $jadwals = Jadwal::with('dosen', 'matkul','kelas')->where('dosen_id', Auth::Id())->get();
+        $jadwals = Jadwal::with('dosen', 'matkul', 'kelas')->where('dosen_id', Auth::Id())->get();
 
         return view('frontend.dosen.jadwal.jadwal_mengajar', [
             'jadwals' => $jadwals,
@@ -24,7 +26,7 @@ class JadwalController extends Controller
         $jadwals = Jadwal::with(['matkul', 'kelas'])
             ->where('kelas_id', Auth::user()->kelas_id)->get();
 
-
         return view('frontend.dosen.jadwal.jadwal_pengganti', compact('dosens', 'jadwals'));
     }
+
 }
