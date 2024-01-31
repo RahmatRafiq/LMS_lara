@@ -1,15 +1,14 @@
-
-@can('jadwal mengajar')    
-@include('components.spesifik_menu.partials.menu',[
-'icon' => 'calendar',
-'parentName' => 'Jadwal',
-'childName' => ['Jadwal Kuliah'],
-'nameRoute' => ['jadwals.mengajar'],
-'countChild' => 1,
-// 'nameRoute' => ['jadwals.mengajar','jadwals.mengajar_pengganti'],
-// 'countChild' => 2,
-// 'childName' => ['Jadwal Kuliah','Jadwal Pengganti'],
-])
+@can('jadwal mengajar')
+    @include('components.spesifik_menu.partials.menu', [
+        'icon' => 'calendar',
+        'parentName' => 'Jadwal',
+        'childName' => ['Jadwal Belajar'],
+        'nameRoute' => ['jadwals.mengajar'],
+        'countChild' => 1,
+        // 'nameRoute' => ['jadwals.mengajar','jadwals.mengajar_pengganti'],
+        // 'countChild' => 2,
+        // 'childName' => ['Jadwal Kuliah','Jadwal Pengganti'],
+    ])
 @endcan
 
 {{-- @can('management materi')
@@ -33,11 +32,11 @@
 @endcan --}}
 
 @can('management nilai')
-@include('components.spesifik_menu.partials.menu',[
-'icon' => 'bar-chart-2',
-'parentName' => 'Laporan',
-'childName' => ['Nilai', 'Absensi'],
-'nameRoute' => ['laporan.nilai', 'laporan.absensi'],
-'countChild' => 2,
-])
+    @include('components.spesifik_menu.partials.menu', [
+        'icon' => 'bar-chart-2',
+        'parentName' => 'Laporan',
+        'childName' => ['Nilai', 'Absensi'],
+        'nameRoute' => ['laporan.nilai', 'laporan.absensi'],
+        'countChild' => 2,
+    ])
 @endcan

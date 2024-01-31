@@ -1,13 +1,13 @@
 <x-app-layouts>
     @push('styles')
-    <link rel="stylesheet" href="{{ asset('assets/bundles/pretty-checkbox/pretty-checkbox.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/bundles/pretty-checkbox/pretty-checkbox.min.css') }}">
     @endpush
     <div class="row justify-content-center">
         <div class="card col-sm-12 col-lg-5">
             <div class="card-body">
                 <div class="row">
                     <div class="col mb-4 mb-lg-0 text-center">
-                        <a href="{{ route('kelas.materi',encrypt($jadwal->id)) }}">
+                        <a href="{{ route('kelas.materi', encrypt($jadwal->id)) }}">
                             <i data-feather="book-open" style="width: 80px; height: 60px; color: #6c757d"></i>
                             <div class="mt-2 font-weight-bold" style="color: #6c757d;">Materi</div>
                         </a>
@@ -58,7 +58,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Mahasiswa</th>
+                                    <th>Siswa</th>
                                     <th>Keterangan</th>
                                 </tr>
                             </thead>
@@ -70,49 +70,52 @@
                                     <input type="hidden" name="pertemuan" value="{{ $absen->pertemuan ?? '' }}">
 
                                     @foreach ($mahasiswa as $i => $mhs)
-                                    <tr>
-                                        <td>{{ $i + 1 }}</td>
-                                        <td>
-                                            <li class="media">
-                                                <img alt="image" class="mr-3 rounded-circle" width="50"
-                                                    src="{{ $mhs->foto == 'default.png' ?  $mhs->pictureDefault : $mhs->picture }}">
-                                                <div class="media-body">
-                                                    <div class="media-title">{{ $mhs->nama }}</div>
-                                                    <div class="text-job text-muted">{{ $mhs->nim }}</div>
-                                                </div>
-                                            </li>
-                                        </td>
+                                        <tr>
+                                            <td>{{ $i + 1 }}</td>
+                                            <td>
+                                                <li class="media">
+                                                    <img alt="image" class="mr-3 rounded-circle" width="50"
+                                                        src="{{ $mhs->foto == 'default.png' ? $mhs->pictureDefault : $mhs->picture }}">
+                                                    <div class="media-body">
+                                                        <div class="media-title">{{ $mhs->nama }}</div>
+                                                        <div class="text-job text-muted">{{ $mhs->nim }}</div>
+                                                    </div>
+                                                </li>
+                                            </td>
 
-                                        <td>
-                                            <input type="hidden" value="{{ $mhs->id }}" name="mahasiswa[]">
-                                            <div class="pretty p-default p-round p-thick">
-                                                <input type="radio" name="status[]{{ $i }}" value="1" {{
-                                                    $mhs->mahasiswaAbsenHariIni ? 'checked' : '' }}>
-                                                <div class="state p-primary-o">
-                                                    <label>Hadir</label>
+                                            <td>
+                                                <input type="hidden" value="{{ $mhs->id }}" name="mahasiswa[]">
+                                                <div class="pretty p-default p-round p-thick">
+                                                    <input type="radio" name="status[]{{ $i }}"
+                                                        value="1"
+                                                        {{ $mhs->mahasiswaAbsenHariIni ? 'checked' : '' }}>
+                                                    <div class="state p-primary-o">
+                                                        <label>Hadir</label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="pretty p-default p-round p-thick">
-                                                <input type="radio" name="status[]{{ $i }}" value="0" {{
-                                                    !$mhs->mahasiswaAbsenHariIni ? 'checked' : '' }}>
-                                                <div class="state p-danger-o">
-                                                    <label>Tidak Hadir</label>
+                                                <div class="pretty p-default p-round p-thick">
+                                                    <input type="radio" name="status[]{{ $i }}"
+                                                        value="0"
+                                                        {{ !$mhs->mahasiswaAbsenHariIni ? 'checked' : '' }}>
+                                                    <div class="state p-danger-o">
+                                                        <label>Tidak Hadir</label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
+                                            </td>
 
-                                        @once
-                                        {{-- @if ($absen) --}}
-                                        <button type="submit" class="btn btn-primary btn-sm mb-3"><i
-                                                class="fas fa-save"></i> Simpan Absen</button>
-                                                <code class="ml-3">Note : Klik Simpan Absen jika ada perubahan Absensi dibawah</code>
-                                        {{-- @else
+                                            @once
+                                                {{-- @if ($absen) --}}
+                                                <button type="submit" class="btn btn-primary btn-sm mb-3"><i
+                                                        class="fas fa-save"></i> Simpan Absen</button>
+                                                <code class="ml-3">Note : Klik Simpan Absen jika ada perubahan Absensi
+                                                    dibawah</code>
+                                                {{-- @else
                                         <button type="button" class="btn btn-sm btn-warning mb-3">Silahkan create absen
                                             terlebih dahulu</button> --}}
-                                        {{-- @endif --}}
-                                        @endonce
+                                                {{-- @endif --}}
+                                            @endonce
 
-                                    </tr>
+                                        </tr>
                                     @endforeach
                                 </form>
                             </tbody>

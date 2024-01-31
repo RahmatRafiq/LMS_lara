@@ -41,8 +41,8 @@
                 </div>
                 <div class="card-wrap">
                     <div class="card-header">
-                        <h4 class="pull-right">Total Mahasiswa kelas {{ $mahasiswa[0]->kelas->kd_kelas
-                            ?? '' }}</h4>
+                        <h4 class="pull-right">Total Mahasiswa kelas
+                            {{ $mahasiswa[0]->kelas->kd_kelas ?? '' }}</h4>
                     </div>
                     <div class="card-body pull-right">
                         {{ $mahasiswa->count() }}
@@ -92,7 +92,7 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>Mahasiswa</th>
+                            <th>Siswa</th>
                             <th>Nilai</th>
                             <th>Komentar dosen</th>
                             <th>Dikumpulkan pada</th>
@@ -103,29 +103,30 @@
                     </thead>
                     <tbody>
                         @foreach ($tugasMahasiswa as $tgsMhs)
-                        <tr class="{{ $tgsMhs->id % 2 == 0 ? 'border-top' : '' }}">
-                            <td>
-                                <li class="media">
-                                    <img alt="image" class="mr-3 rounded-circle" width="50"
-                                        src="{{ $tgsMhs->mahasiswa->foto == 'default.png' ?  $tgsMhs->mahasiswa->pictureDefault : $tgsMhs->mahasiswa->picture }}">
-                                    <div class="media-body">
-                                        <div class="media-title">{{ $tgsMhs->mahasiswa->nama }}</div>
-                                        <div class="text-job text-muted">{{ $tgsMhs->mahasiswa->nim }}</div>
-                                    </div>
-                                </li>
-                            </td>
-                            <td>
-                                <h5>{{ $tgsMhs->nilai->nilai ?? '' }}</h5>
-                            </td>
-                            <td>{{ $tgsMhs->nilai->komentar_dosen ?? '' }}</td>
-                            <td>{{ date('d F Y ~ H:i', strtotime($tgsMhs->created_at)) }}</td>
-                            <td>{{ date('d F Y ~ H:i', strtotime($tgsMhs->updated_at)) }}</td>
-                            <td><a href="{{ $tgsMhs->file_or_link }}" target="_blank">{{ $tgsMhs->file_or_link }}</a></td>
-                            <td>
-                                <a href="{{ route('nilai.create', $tgsMhs) }}" class="btn btn-primary btn-sm"><i
-                                        class="fas fa-balance-scale"></i> Tanggapi</a>
-                            </td>
-                        </tr>
+                            <tr class="{{ $tgsMhs->id % 2 == 0 ? 'border-top' : '' }}">
+                                <td>
+                                    <li class="media">
+                                        <img alt="image" class="mr-3 rounded-circle" width="50"
+                                            src="{{ $tgsMhs->mahasiswa->foto == 'default.png' ? $tgsMhs->mahasiswa->pictureDefault : $tgsMhs->mahasiswa->picture }}">
+                                        <div class="media-body">
+                                            <div class="media-title">{{ $tgsMhs->mahasiswa->nama }}</div>
+                                            <div class="text-job text-muted">{{ $tgsMhs->mahasiswa->nim }}</div>
+                                        </div>
+                                    </li>
+                                </td>
+                                <td>
+                                    <h5>{{ $tgsMhs->nilai->nilai ?? '' }}</h5>
+                                </td>
+                                <td>{{ $tgsMhs->nilai->komentar_dosen ?? '' }}</td>
+                                <td>{{ date('d F Y ~ H:i', strtotime($tgsMhs->created_at)) }}</td>
+                                <td>{{ date('d F Y ~ H:i', strtotime($tgsMhs->updated_at)) }}</td>
+                                <td><a href="{{ $tgsMhs->file_or_link }}"
+                                        target="_blank">{{ $tgsMhs->file_or_link }}</a></td>
+                                <td>
+                                    <a href="{{ route('nilai.create', $tgsMhs) }}" class="btn btn-primary btn-sm"><i
+                                            class="fas fa-balance-scale"></i> Tanggapi</a>
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>

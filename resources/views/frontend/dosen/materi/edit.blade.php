@@ -38,7 +38,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="matkul">Matakuliah</label>
+                    <label for="matkul">Mata Pelajaran</label>
                     <select name="matkul_id" id="matkul" class="form-control">
                         <option value="{{ $materi->matkul_id }}" class="form-control">
                             {{ $materi->matkul->nm_matkul }}</option>

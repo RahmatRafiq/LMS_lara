@@ -2,10 +2,10 @@
     @push('styles')
         <style>
             td:nth-child(1) {
-              width: 8em;
-              min-width: 23em;
-              /* max-width: 33em; */
-              word-break: break-all;
+                width: 8em;
+                min-width: 23em;
+                /* max-width: 33em; */
+                word-break: break-all;
             }
         </style>
     @endpush
@@ -16,74 +16,80 @@
         </div>
         <div class="card-body">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
-              {{-- List Tab --}}
-              @foreach ($kelas as $key => $kls)
-                <li class="nav-item">
-                    <a class="nav-link{{ $loop->index == 0 ? ' active' : '' }}" data-toggle="tab" href="#content-{{ $key }}" role="tab"
-                        aria-controls="{{ $kls->kd_kelas }}" aria-selected="true">{{ $kls->kd_kelas }}</a>
-                </li> 
-              @endforeach
-              {{-- End List Tab --}}
+                {{-- List Tab --}}
+                @foreach ($kelas as $key => $kls)
+                    <li class="nav-item">
+                        <a class="nav-link{{ $loop->index == 0 ? ' active' : '' }}" data-toggle="tab"
+                            href="#content-{{ $key }}" role="tab" aria-controls="{{ $kls->kd_kelas }}"
+                            aria-selected="true">{{ $kls->kd_kelas }}</a>
+                    </li>
+                @endforeach
+                {{-- End List Tab --}}
             </ul>
-  
+
             <div class="tab-content" id="myTabContent">
-  
+
                 {{-- Tab pane --}}
                 @foreach ($kelas as $key => $kls)
-                  <div class="tab-pane fade{{ $loop->index == 0 ? ' show active' : '' }}" id="content-{{ $key }}" role="tabpanel" aria-labelledby="{{ $kls->kd_kelas }}-tab">
-                    <hr>
-                      <h5>{{ auth()->user()->matkuls->find($kls->pivot->matkul_id)->nm_matkul ?? '' }}</h5>
-                    <hr>
-                      <a href="{{ route('laporan.absensi.export_excel', [$kls->id, $kls->pivot->matkul_id ?? '-']) }}" class="btn btn-success btn-md mb-3"><i class="fas fa-file-excel"></i> Export Excel</a>
-                    <div class="table-responsive">
-                      <table border="0px" class="table">
-                          <thead>
-                              <tr>
-                                <td class="bg-secondary text-center font-weight-bold">MAHASISWA</td>
-                                @for ($i = 1; $i <= 16; $i++)
-                                  <td class="text-center bg-secondary font-weight-bold">P {{ $i }}</td>
-                                @endfor
-                              </tr>
-                              @foreach ($mahasiswa as $key => $mhs)
-                                  <tr>
-                                    @if ($mhs->kelas_id == $kls->id)
-                                        <td style="background:{{ $key % 2 == 0 ? '#6FB2D2' : '' }}; border: 1px solid; border-color: #3A5BA0">
-                                          <li class="media">
-                                              <img alt="image" class="mr-3 rounded-circle" width="50"
-                                                  src="{{ $mhs->foto == 'default.png' ?  $mhs->pictureDefault : $mhs->picture }}">
-                                              <div class="media-body">
-                                                  <div class="media-title">{{ $mhs->nama }}</div>
-                                                  <div class="text-job">{{ $mhs->nim }}</div>
-                                              </div>
-                                          </li>  
-                                        </td>
-                                      @if ($mhs->kelas_id == $kls->id)
+                    <div class="tab-pane fade{{ $loop->index == 0 ? ' show active' : '' }}"
+                        id="content-{{ $key }}" role="tabpanel" aria-labelledby="{{ $kls->kd_kelas }}-tab">
+                        <hr>
+                        <h5>{{ auth()->user()->matkuls->find($kls->pivot->matkul_id)->nm_matkul ?? '' }}</h5>
+                        <hr>
+                        <a href="{{ route('laporan.absensi.export_excel', [$kls->id, $kls->pivot->matkul_id ?? '-']) }}"
+                            class="btn btn-success btn-md mb-3"><i class="fas fa-file-excel"></i> Export Excel</a>
+                        <div class="table-responsive">
+                            <table border="0px" class="table">
+                                <thead>
+                                    <tr>
+                                        <td class="bg-secondary text-center font-weight-bold">Siswa</td>
                                         @for ($i = 1; $i <= 16; $i++)
-                                          <td style="background:{{ $key % 2 == 0 ? '#6FB2D2' : '' }}; text-align: center; font-size: 18px; font-weight: bold; border: 1px solid; border-color: #3A5BA0">
-                                            @foreach($mhs->absens as $absen)
-                                                @if ($absen->pertemuan == $i && $kls->pivot->matkul_id == $absen->jadwal->matkul_id)
-                                                {{ $absen->status ? '✓' : '-' }}
-                                                @endif
-                                            @endforeach
-                                          </td>
+                                            <td class="text-center bg-secondary font-weight-bold">P {{ $i }}
+                                            </td>
                                         @endfor
-                                      @endif
-                                    @endif
-                                  </tr>
-                              @endforeach
-                          </thead>
-                          <tbody>
-                          </tbody>
-                      </table>
+                                    </tr>
+                                    @foreach ($mahasiswa as $key => $mhs)
+                                        <tr>
+                                            @if ($mhs->kelas_id == $kls->id)
+                                                <td
+                                                    style="background:{{ $key % 2 == 0 ? '#6FB2D2' : '' }}; border: 1px solid; border-color: #3A5BA0">
+                                                    <li class="media">
+                                                        <img alt="image" class="mr-3 rounded-circle" width="50"
+                                                            src="{{ $mhs->foto == 'default.png' ? $mhs->pictureDefault : $mhs->picture }}">
+                                                        <div class="media-body">
+                                                            <div class="media-title">{{ $mhs->nama }}</div>
+                                                            <div class="text-job">{{ $mhs->nim }}</div>
+                                                        </div>
+                                                    </li>
+                                                </td>
+                                                @if ($mhs->kelas_id == $kls->id)
+                                                    @for ($i = 1; $i <= 16; $i++)
+                                                        <td
+                                                            style="background:{{ $key % 2 == 0 ? '#6FB2D2' : '' }}; text-align: center; font-size: 18px; font-weight: bold; border: 1px solid; border-color: #3A5BA0">
+                                                            @foreach ($mhs->absens as $absen)
+                                                                @if ($absen->pertemuan == $i && $kls->pivot->matkul_id == $absen->jadwal->matkul_id)
+                                                                    {{ $absen->status ? '✓' : '-' }}
+                                                                @endif
+                                                            @endforeach
+                                                        </td>
+                                                    @endfor
+                                                @endif
+                                            @endif
+                                        </tr>
+                                    @endforeach
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                  </div>
                 @endforeach
                 {{-- End Tab Pane --}}
-  
+
             </div>
         </div>
     </div>
-  
+
     {{-- @push('lastScripts')
         <script>
             $(document).ready(function () {
@@ -104,4 +110,4 @@
             })
         </script>
     @endpush --}}
-  </x-app-layouts>
+</x-app-layouts>

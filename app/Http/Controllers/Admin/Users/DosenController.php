@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Admin\Users;
 
 use App\Http\Controllers\Controller;
-use App\Models\{Dosen, Kelas, Matkul};
+use App\Http\Requests\Admin\DosenRequest;
+use App\Models\Dosen;
+use App\Models\Kelas;
+
+use App\Models\Matkul;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
-use App\Http\Requests\Admin\DosenRequest;
 
 class DosenController extends Controller
 {
@@ -53,7 +56,7 @@ class DosenController extends Controller
     {
         return view('backend.manajemen_user.dosen.create', [
             'matkuls' => Matkul::get(),
-            'kelas' => Kelas::get()
+            'kelas' => Kelas::get(),
         ]);
     }
 
@@ -77,7 +80,7 @@ class DosenController extends Controller
         $dosen->assignRole('dosen');
         $dosen->kelas()->sync($request->kelas);
         $dosen->matkuls()->sync($request->matkul);
-        return redirect(route('dosens.index'))->with('success', 'Berhasil membuat data dosen');
+        return redirect(route('dosens.index'))->with('success', 'Berhasil membuat data Guru');
     }
 
     public function edit(Dosen $dosen)
@@ -86,7 +89,7 @@ class DosenController extends Controller
         return view('backend.manajemen_user.dosen.edit', [
             'dosen' => $dosen,
             'matkuls' => Matkul::get(),
-            'kelas' => Kelas::get()
+            'kelas' => Kelas::get(),
         ]);
     }
 
@@ -108,7 +111,7 @@ class DosenController extends Controller
 
         $dosen->kelas()->sync($request->kelas);
         $dosen->matkuls()->sync($request->matkul);
-        return redirect(route('dosens.index'))->with('success', 'Berhasil update data dosen');
+        return redirect(route('dosens.index'))->with('success', 'Berhasil update data Guru');
     }
 
     //Delete 1 per 1 data

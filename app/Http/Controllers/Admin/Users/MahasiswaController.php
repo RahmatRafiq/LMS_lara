@@ -2,58 +2,63 @@
 
 namespace App\Http\Controllers\Admin\Users;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\MahasiswaRequest;
-use Illuminate\Support\Facades\Storage;
-use Yajra\DataTables\Facades\DataTables;
-use App\Models\{Fakultas, Kelas, Mahasiswa};
+
+use App\Models\Fakultas;
+
+use App\Models\Kelas;
+
+use App\Models\Mahasiswa;
+use Illuminate\Http\Request;use Illuminate\Support\Facades\Storage;use Yajra\DataTables\Facades\DataTables;
 
 class MahasiswaController extends Controller
 {
     public function index(Request $request)
     {
-        if($request->wantsJson()){
-            return DataTables::of(Mahasiswa::query()->latest()->with('fakultas','kelas'))
-            ->addColumn('action', function ($mahasiswa) {
-                $button = '
+        if ($request->wantsJson()) {
+            return DataTables::of(Mahasiswa::query()->latest()->with('fakultas', 'kelas'))
+                ->addColumn('action', function ($mahasiswa) {
+                    $button = '
                         <div class="dropdown d-inline">
                             <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Action
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item has-icon" href="'.route("mahasiswa.edit",$mahasiswa).'"><i class="
+                                <a class="dropdown-item has-icon" href="' . route("mahasiswa.edit", $mahasiswa) . '"><i class="
                                 fas fa-edit"></i> Edit</a>
-                                <form action="'.route("mahasiswa.destroy",$mahasiswa).'" method="post" style="font-size:13px">
-                                    '.csrf_field().'
-                                    '.method_field('delete').'
+                                <form action="' . route("mahasiswa.destroy", $mahasiswa) . '" method="post" style="font-size:13px">
+                                    ' . csrf_field() . '
+                                    ' . method_field('delete') . '
                                     <button type="submit" class="dropdown-item has-icon font-sm"><i class="fas fa-trash"></i> Delete</button>
                                 </form>
                             </div>
                         </div>
                 ';
-                return $button;
-            })
-            ->make(true);
-        }else{
+                    return $button;
+                })
+                ->make(true);
+        } else {
             $mahasiswas = Mahasiswa::count();
         }
 
-        return view('backend.manajemen_user.mahasiswa.index',compact('mahasiswas'));
+        return view('backend.manajemen_user.mahasiswa.index', compact('mahasiswas'));
     }
 
     public function create()
     {
         $kelas = Kelas::get();
         $fakultas = Fakultas::get();
-        return view('backend.manajemen_user.mahasiswa.create',compact('kelas','fakultas'));
+        return view('backend.manajemen_user.mahasiswa.create', compact('kelas', 'fakultas'));
     }
 
     public function store(MahasiswaRequest $request)
     {
-        if(request('foto')) $img = request()->file('foto')->move('images/profile');
-        
-       $mahasiswa = Mahasiswa::create([
+        if (request('foto')) {
+            $img = request()->file('foto')->move('images/profile');
+        }
+
+        $mahasiswa = Mahasiswa::create([
             'foto' => $img ?? 'default.png',
             'nim' => $request->nim,
             'nama' => $request->nama,
@@ -64,7 +69,7 @@ class MahasiswaController extends Controller
         ]);
         $mahasiswa->assignRole('mahasiswa');
 
-        return redirect(route('mahasiswa.index'))->with('success','Berhasil membuat data mahasiswa');
+        return redirect(route('mahasiswa.index'))->with('success', 'Berhasil membuat data Siswa');
     }
 
     public function edit(Mahasiswa $mahasiswa)
@@ -72,16 +77,16 @@ class MahasiswaController extends Controller
         return view('backend.manajemen_user.mahasiswa.edit', [
             'mahasiswa' => $mahasiswa,
             'fakultas' => Fakultas::get(),
-            'kelas' => Kelas::get()
+            'kelas' => Kelas::get(),
         ]);
     }
 
     public function update(Mahasiswa $mahasiswa)
     {
-        if(request('foto')){
+        if (request('foto')) {
             $img = request()->file('foto')->store('images/profile');
             Storage::delete($mahasiswa->foto);
-        }else{
+        } else {
             $img = $mahasiswa->foto;
         }
 
@@ -92,7 +97,7 @@ class MahasiswaController extends Controller
             'fakultas_id' => request('fakultas'),
             'kelas_id' => request('kelas'),
         ]);
-        return redirect(route('mahasiswa.index'))->with('success','Berhasil meng-update data');
+        return redirect(route('mahasiswa.index'))->with('success', 'Berhasil update data Siswa');
     }
 
     public function destroy(Mahasiswa $mahasiswa)
@@ -106,12 +111,12 @@ class MahasiswaController extends Controller
     {
         $nims = request('nim');
         // dd($nims);
-        foreach($nims as $i => $nim){
-            $mhs[] = Mahasiswa::where('nim',$nim)->get();
-            foreach($mhs[$i] as $m){
+        foreach ($nims as $i => $nim) {
+            $mhs[] = Mahasiswa::where('nim', $nim)->get();
+            foreach ($mhs[$i] as $m) {
                 $m->delete();
-                if($m->foto != 'default.png'){
-                    Storage::delete($m->foto); 
+                if ($m->foto != 'default.png') {
+                    Storage::delete($m->foto);
                 }
             }
         }

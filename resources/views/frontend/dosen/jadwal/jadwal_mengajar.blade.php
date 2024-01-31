@@ -39,7 +39,7 @@
                                 </p>
                                 <p class="clearfix">
                                     <span class="float-left font-bold">
-                                        Kode Matkul
+                                        Kode Mapel
                                     </span>
                                     <span class="float-right text-muted">
                                         {{ $jadwal->matkul->kd_matkul }}

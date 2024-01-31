@@ -8,18 +8,18 @@
                 <div class="pricing-padding">
                     <div class="pricing-price">
                         <h2>{{ $jadwal->hari }}</h2>
-                        <h5>{{ $jadwal->jam_masuk .' - '. $jadwal->jam_keluar }}</h5>
+                        <h5>{{ $jadwal->jam_masuk . ' - ' . $jadwal->jam_keluar }}</h5>
                         <div>Jam masuk - Jam keluar {{ $jadwal->kd_kelas }}</div>
                     </div>
                     <div>
                         <table class="table">
                             <thead>
                                 <tr align="left">
-                                    <th>Dosen</th>
+                                    <th>Guru</th>
                                     <td>{{ $jadwal->dosen->nama }}</td>
                                 </tr>
                                 <tr align="left">
-                                    <th>Matakuliah</th>
+                                    <th>Mata Pelajaran</th>
                                     <td>{{ $jadwal->matkul->nm_matkul }}</td>
                                 </tr>
                                 <tr align="left">
@@ -31,18 +31,19 @@
                     </div>
                 </div>
                 @if ($waktuAbsen && $allowMhsAbsen)
-                <div class="pricing-cta bg-primary">
-                    <form action="{{ route('absen') }}" method="post">
-                        @csrf
-                        <input type="hidden" name="jadwal" value="{{ encrypt($jadwal->id) }}">
-                        <button class="btn btn-primary form-control">{{ $isAbsen ? 'Sudah Absen' : 'Absen' }} <i class="fas fa-arrow-right"></i></button>
-                    </form>
-                </div>
+                    <div class="pricing-cta bg-primary">
+                        <form action="{{ route('absen') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="jadwal" value="{{ encrypt($jadwal->id) }}">
+                            <button class="btn btn-primary form-control">{{ $isAbsen ? 'Sudah Absen' : 'Absen' }} <i
+                                    class="fas fa-arrow-right"></i></button>
+                        </form>
+                    </div>
                 @else
-                <div class="pricing-cta bg-primary">
-                    <button class="btn btn-primary form-control disabled">Absen <i
-                            class="fas fa-arrow-right"></i></button>
-                </div>
+                    <div class="pricing-cta bg-primary">
+                        <button class="btn btn-primary form-control disabled">Absen <i
+                                class="fas fa-arrow-right"></i></button>
+                    </div>
                 @endif
             </div>
         </div>
@@ -58,7 +59,8 @@
                                     <div class="mt-2 font-weight-bold">Materi</div>
                                 </a>
                             </div>
-                            <a href="{{ route('tugas.mhs', encrypt($jadwal->id)) }}" class="col mb-4 mb-lg-0 text-center">
+                            <a href="{{ route('tugas.mhs', encrypt($jadwal->id)) }}"
+                                class="col mb-4 mb-lg-0 text-center">
                                 <i data-feather="clipboard"></i>
                                 <div class="mt-2 font-weight-bold">Tugas</div>
                             </a>
@@ -80,26 +82,27 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Status</th>
-                                        <th>Matakuliah</th>
+                                        <th>Mata Pelajaran</th>
                                         <th>Pertemuan</th>
                                         <th>Tanggal</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @forelse ($absens as $i => $absen)
-                                    <tr>
-                                        <th scope="row">{{ $absens->firstItem() + $i }}</th>
-                                        <td><span
-                                                class="badge badge-{{ $absen->status == 1 ? 'success' : 'danger' }}">{{ $absen->status == 1 ? 'Hadir' : 'Tidak Hadir' }}</span>
-                                        </td>
-                                        <td>{{ $jadwal->matkul->nm_matkul }}</td>
-                                        <td>{{ $absen->pertemuan }}</td>
-                                        <td>{{ $absen->tanggal }}</td>
-                                    </tr>
+                                        <tr>
+                                            <th scope="row">{{ $absens->firstItem() + $i }}</th>
+                                            <td><span
+                                                    class="badge badge-{{ $absen->status == 1 ? 'success' : 'danger' }}">{{ $absen->status == 1 ? 'Hadir' : 'Tidak Hadir' }}</span>
+                                            </td>
+                                            <td>{{ $jadwal->matkul->nm_matkul }}</td>
+                                            <td>{{ $absen->pertemuan }}</td>
+                                            <td>{{ $absen->tanggal }}</td>
+                                        </tr>
                                     @empty
-                                    <tr>
-                                        <td colspan="5" class="text-center text-secondary">Tidak ada rekap absen</td>
-                                    </tr>
+                                        <tr>
+                                            <td colspan="5" class="text-center text-secondary">Tidak ada rekap absen
+                                            </td>
+                                        </tr>
                                     @endforelse
                                 </tbody>
                             </table>

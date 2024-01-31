@@ -32,7 +32,7 @@
                     <input disabled value="{{ $absensi->jadwal->kelas->kd_kelas }}" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="matkul">Matakuliah</label>
+                    <label for="matkul">Mata Pelajaran</label>
                         <input disabled value="{{ $absensi->jadwal->matkul->nm_matkul }}" class="form-control">
                 </div>
                 <div class="form-group">

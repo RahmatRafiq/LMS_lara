@@ -17,9 +17,11 @@
                                 <h6 class="mb-1">Panduan Penggunaan</h6>
                             </div>
                         </a>
-                        <a href="https://www.youtube.com/watch?v=37AFCKgYRZQ" target="_blank" class="list-group-item list-group-item-action">
+                        <a href="https://www.youtube.com/watch?v=37AFCKgYRZQ" target="_blank"
+                            class="list-group-item list-group-item-action">
                             <div class="d-flex justify-content-between">
-                                <h6 class="mb-1"><img width="36" height="36" alt="GitHub Logomark" class="height-auto"
+                                <h6 class="mb-1"><img width="36" height="36" alt="GitHub Logomark"
+                                        class="height-auto"
                                         src="https://cdn3.iconfinder.com/data/icons/2018-social-media-logotypes/1000/2018_social_media_popular_app_logo_youtube-512.png">
                                 </h6>
                                 <h6 class="mb-1">Youtube</h6>
@@ -28,7 +30,8 @@
                         <a href="https://github.com/fadlieFerdiyansah/web-elearning" target="_blank"
                             class="list-group-item list-group-item-action">
                             <div class="d-flex justify-content-between">
-                                <h6 class="mb-1"><img width="40" height="40" alt="GitHub Logomark" class="height-auto"
+                                <h6 class="mb-1"><img width="40" height="40" alt="GitHub Logomark"
+                                        class="height-auto"
                                         src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png">
                                 </h6>
                                 <h6 class="mb-1 mt-2">Github</h6>
@@ -51,7 +54,7 @@
                                     <div class="text-center">
                                         <i class="fa fa-user-graduate fa-3x"></i>
                                         <div class="mt-3 font-weight-bold">
-                                            <h5>Mahasiswa</h5>
+                                            <h5>Siswa</h5>
                                         </div>
                                         <div class="text-small text-muted">
                                             <span class="text-primary">
@@ -71,7 +74,7 @@
                                     <div class="text-center">
                                         <i class="fa fa-user fa-3x"></i>
                                         <div class="mt-3 font-weight-bold">
-                                            <h5>Dosen</h5>
+                                            <h5>Guru</h5>
                                         </div>
                                         <div class="text-small text-muted">
                                             <span class="text-primary">
@@ -111,7 +114,7 @@
                                     <div class="text-center">
                                         <i class="fa fa-book-open fa-3x"></i>
                                         <div class="mt-3 font-weight-bold">
-                                            <h5>Matakuliah</h5>
+                                            <h5>Mata Pelajaran</h5>
                                         </div>
                                         <div class="text-small text-muted">
                                             <span class="text-primary">
@@ -131,7 +134,7 @@
                                     <div class="text-center">
                                         <i class="fa fa-briefcase fa-3x"></i>
                                         <div class="mt-3 font-weight-bold">
-                                            <h5>Fakultas</h5>
+                                            <h5>Sekolah</h5>
                                         </div>
                                         <div class="text-small text-muted">
                                             <span class="text-primary">
